@@ -198,6 +198,27 @@ canvas {
   
 </head>
 <body>
+  <div id="overlay" style="
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+<button id="startBtn" style="
+padding:20px 40px;
+font-size:20px;
+border:none;
+border-radius:10px;
+background:#ff4d88;
+color:white;
+cursor:pointer;">
+❤️ Tocar para empezar
+</button>
+</div>
   <link rel="stylesheet" href="styles.css" />
     <script src="app.js"></script>
 
@@ -237,7 +258,7 @@ canvas {
 
     <div id="music-container">
       <iframe
-        src="https://www.youtube.com/embed/CM6qCGP9t6k?autoplay=1&mute=0&loop=1&playlist=CM6qCGP9t6k"
+        src="https://www.youtube.com/embed/CM6qCGP9t6k?autoplay=1&mute=1&loop=1&playlist=CM6qCGP9t6k"
         class="frame" 
         allowfullscreen
         frameborder="0"
@@ -717,7 +738,7 @@ canvas {
       document.getElementById("music-container").innerHTML += `
 <audio src="${bgMusicURL}" ${
         bgMusicControls ? "controls" : ""
-      } autoplay loop>    
+      } <audio id="bgAudio" src="${bgMusicURL}" loop></audio>    
 <p>If you are reading this, it is because your browser does not support the audio element.</p>
 </audio>
 `;
@@ -767,8 +788,22 @@ canvas {
       var d = e.wheelDelta / 20 || -e.detail;
       radius += d;
       init(1);
+      
     };
+    document.getElementById("startBtn").addEventListener("click", function() {
+
+  const audio = document.getElementById("bgAudio");
+  if (audio) {
+    audio.play();
+  }
+
+  document.getElementById("overlay").style.display = "none";
+
+});
   </script>
 </body>
 </html>
+
+</html>
+
 
